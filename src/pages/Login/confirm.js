@@ -23,12 +23,25 @@ export default class ConfirmLogin extends React.Component{
                         </div>
                         
                         <div className="container-login100-form-btn p-t-25">
-                            <button 
-                                className="login100-form-btn"
-                                onClick={this.props.onAllow}
-                            >
-                                Đồng ý
-                            </button>
+                            <div className="row">
+                                <button 
+                                    className="login100-form-btn col-6"
+                                    onClick={this.props.onDeny}
+                                    style={{ width: '150px'}}
+                                >
+                                    Từ chối
+                                </button>
+
+                                <button 
+                                    className="login100-form-btn col-6"
+                                    onClick={this.props.onAllow}
+                                    style={{ width: '150px'}}
+                                >
+                                    Đồng ý
+                                </button>
+                            </div>
+                            
+                            
                         </div>
                     </div>
                 </div>
