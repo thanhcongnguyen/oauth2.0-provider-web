@@ -1,5 +1,6 @@
 import React from 'react';
 import {Helmet} from "react-helmet";
+import _ from 'lodash';
 import queryString from 'query-string';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
@@ -39,7 +40,7 @@ class Login extends React.Component{
         if(!email || !password){
             return;
         }
-        axios.post(`${hostname}/user/login`, {
+        return axios.post(`${hostname}/user/login`, {
             email,
             password,
             client_id,
@@ -49,13 +50,20 @@ class Login extends React.Component{
             scope
         })
         .then( (response) => {
-            console.log('response.data.data', response.data.data);
             this.setState({
                 data: response.data.data
             });
         })
-        .catch(function (error) {
-            console.log(error);
+        .catch( (error) => {
+            let errorMessage = _.get(error, 'response.data.error');
+            let errors = ['user not exits!', 'invalid password!', 'error_uri'];
+            let { redirect_uri } = this.state;
+            if( redirect_uri ){
+                if(errors.indexOf(errorMessage) === -1){
+                    let url = `${this.state.redirect_uri}/redirect?error=${errorMessage}`;
+                    this.props.history.replace(url);
+                }
+            }  
         });
     }
 
@@ -73,12 +81,12 @@ class Login extends React.Component{
 
     onDeny = () => {
         let url = `${this.state.redirect_uri}/redirect?error=access_denied`;
-        window.location.href = url;
+        this.props.history.replace(url);
     }
 
     onAllow = () => {
         let url = `${this.state.redirect_uri}/redirect?code=${this.state.data.code}&state=${this.state.data.state}`;
-        window.location.href = url;
+        this.props.history.replace(url);
     }
 
     render(){
