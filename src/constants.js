@@ -1,1 +1,1 @@
-export const hostname = 'http://13.250.31.241:8000';
+export const hostname = 'https://13.250.31.241:8000';
