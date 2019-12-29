@@ -6,7 +6,9 @@ import {
 } from "react-router-dom";
 import Login from './pages/Login';
 import Register from './pages/Register';
-import FindNotFound from './pages/FindNotFound'
+import Provider from './pages/Provider';
+import FindNotFound from './pages/FindNotFound';
+
 
 
 export default function Routes() {
@@ -18,6 +20,9 @@ export default function Routes() {
             </Route>
             <Route exact path="/register">
               <Register />
+            </Route>
+            <Route exact path="/provider-register">
+              <Provider />
             </Route>
             <Route path="*">
               <FindNotFound />

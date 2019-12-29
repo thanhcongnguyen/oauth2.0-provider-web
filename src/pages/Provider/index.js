@@ -3,39 +3,33 @@ import {Helmet} from "react-helmet";
 import axios from 'axios';
 import _ from 'lodash';
 import { hostname } from '../../constants';
-import './register.css';
+import './provider.css';
 
-export default class Register extends React.Component {
+export default class Provider extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            email: '',
-            password: '',
-            re_password: '',
+            client_id: '',
+            redirect_uri: '',
+            client_secret: '',
             data: '',
             error: ''
         }
     }
 
     onRegister = () => {
-        let { email, password, re_password } =  this.state;
-        if(!email || !password || !re_password){
+        let { client_id, redirect_uri, client_secret } =  this.state;
+        if(!client_id || !redirect_uri || !client_secret){
             this.setState({
                 error: 'Vui lòng nhập đầy đủ thông tin!'
             });
             return;
         };
 
-        if(password !== re_password){
-            this.setState({
-                error: 'Mật khẩu không giống nhau!'
-            });
-            return; 
-        }
-
-        return axios.post(`${hostname}/user/register`, {
-            email,
-            password
+        return axios.post(`${hostname}/provider/create`, {
+            client_id,
+            redirect_uri,
+            client_secret
         })
         .then( (response) => {
             this.setState({
@@ -63,33 +57,33 @@ export default class Register extends React.Component {
         });
     }
 
-    onInputEmail = (value) => {
+    onInputClientId = (value) => {
         this.setState({
-            email: value
+            client_id: value
         });
     }
 
-    onInputPassword = (value) => {
+    onInputClientSecret = (value) => {
         this.setState({
-            password: value
+            client_secret: value
         });
     }
 
-    onInputRePassword = (value) => {
+    onInputReURI = (value) => {
         this.setState({
-            re_password: value
+            redirect_uri: value
         });
     }
 
     goBack = () => {
-        window.history.back();
+        window.location.href = '/register';
     }
 
     render(){
         return(
         <React.Fragment>
             <Helmet>
-            <title>Wecantalk.vn - Đăng ký</title>
+            <title>Wecantalk.vn - Đăng ký ứng dụng</title>
             </Helmet>
             {
                 this.state.data === ''
@@ -100,15 +94,16 @@ export default class Register extends React.Component {
                             <span className="login100-form-title p-b-55">
                                 We Can Talk
                             </span>
+                            <div class="title-register"><h5>Đăng ký ứng dụng</h5></div>
         
                             <div className="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
                                 <input 
                                     className="input100" 
                                     type="text" 
-                                    name="email" 
-                                    id="email" 
-                                    placeholder="Email"
-                                    onChange = {(e) => this.onInputEmail(e.target.value)}
+                                    name="Client_Id" 
+                                    id="Client_Id" 
+                                    placeholder="Id của ứng dụng"
+                                    onChange = {(e) => this.onInputClientId(e.target.value)}
                                 />
                                 <span className="focus-input100"></span>
                                 <span className="symbol-input100">
@@ -119,11 +114,9 @@ export default class Register extends React.Component {
                             <div className="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
                                 <input 
                                     className="input100" 
-                                    type="password" 
-                                    name="pass" 
-                                    id="Password" 
-                                    placeholder="Mật khẩu" 
-                                    onChange = {(e) => this.onInputPassword(e.target.value)}
+                                    type="text"  
+                                    placeholder="Mã bí mật của ứng dụng" 
+                                    onChange = {(e) => this.onInputClientSecret(e.target.value)}
                                 />
                                 <span className="focus-input100"></span>
                                 <span className="symbol-input100">
@@ -134,11 +127,9 @@ export default class Register extends React.Component {
                             <div className="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
                                 <input 
                                     className="input100" 
-                                    type="password" 
-                                    name="pass" 
-                                    id="re-password" 
-                                    placeholder="Nhập lại mật khẩu" 
-                                    onChange = {(e) => this.onInputRePassword(e.target.value)}
+                                    type="text" 
+                                    placeholder="Domain của ứng dụng" 
+                                    onChange = {(e) => this.onInputReURI(e.target.value)}
                                 />
                                 <span className="focus-input100"></span>
                                 <span className="symbol-input100">
@@ -171,7 +162,7 @@ export default class Register extends React.Component {
                             <span className="login100-form-title p-b-55">
                                 We Can Talk
                             </span>
-                            <div className="message-success">Đăng ký tài khoản thành công!</div>
+                            <div className="message-success">Đăng ký ứng dụng thành công!</div>
                             <div className="container-login100-form-btn p-t-25">
                                 <button 
                                     className="login100-form-btn"
