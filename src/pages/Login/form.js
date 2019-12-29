@@ -40,14 +40,7 @@ export default class FormLogin extends React.Component{
                                 <span className="lnr lnr-lock"></span>
                             </span>
                         </div>
-    
-                        <div className="contact100-form-checkbox m-l-4">
-                            <input className="input-checkbox100" id="ckb1" type="checkbox" name="remember-me" />
-                            <label className="label-checkbox100" htmlFor="ckb1">
-                                Nhớ tài khoản
-                            </label>
-                        </div>
-                        
+                        {this.props.error && <div style={{color: '#ed2049'}}>{this.props.error}</div>}
                         <div className="container-login100-form-btn p-t-25">
                             <button 
                                 className="login100-form-btn"

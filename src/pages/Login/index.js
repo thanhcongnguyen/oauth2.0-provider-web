@@ -21,6 +21,7 @@ class Login extends React.Component{
             state: '',
             scope: '',
             data: '',
+            error: ''
         }
     }
 
@@ -51,7 +52,8 @@ class Login extends React.Component{
         })
         .then( (response) => {
             this.setState({
-                data: response.data.data
+                data: response.data.data,
+                error: ''
             });
         })
         .catch( (error) => {
@@ -63,7 +65,12 @@ class Login extends React.Component{
                     let url = `${this.state.redirect_uri}/redirect?error=${errorMessage}`;
                     this.props.history.replace(url);
                 }
-            }  
+                return;
+            }
+            
+            this.setState({
+                error: 'Yêu cầu không hợp lệ, vui lòng kiểm tra lại!'
+            });
         });
     }
 
@@ -101,6 +108,8 @@ class Login extends React.Component{
                     onInputEmail = {this.onInputEmail} 
                     onInputPassword = {this.onInputPassword}
                     onLogin = {this.onLogin}
+                    error={this.state.error}
+
                 />
             }
 
@@ -111,6 +120,7 @@ class Login extends React.Component{
                     onAllow={this.onAllow}
                 />
             }
+
         </React.Fragment>)
     }
 }
