@@ -3,6 +3,7 @@ import {Helmet} from "react-helmet";
 import axios from 'axios';
 import _ from 'lodash';
 import { hostname } from '../../constants';
+import './register.css';
 
 export default class Register extends React.Component {
     constructor(props){
@@ -170,7 +171,7 @@ export default class Register extends React.Component {
                             <span className="login100-form-title p-b-55">
                                 We Can Talk
                             </span>
-                            <div>Đăng ký tài khoản thành công!</div>
+                            <div className="message-success">Đăng ký tài khoản thành công!</div>
                             <div className="container-login100-form-btn p-t-25">
                                 <button 
                                     className="login100-form-btn"
