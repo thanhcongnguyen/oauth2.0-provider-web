@@ -55,7 +55,7 @@ export default class FormLogin extends React.Component{
                                 Chưa có tài khoản?
                             </span>
     
-                            <a className="txt1 bo1 hov1" href="#">
+                            <a className="txt1 bo1 hov1" href="/register">
                                 Đăng ký							
                             </a>
                         </div>

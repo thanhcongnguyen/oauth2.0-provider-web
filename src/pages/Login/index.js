@@ -39,6 +39,9 @@ class Login extends React.Component{
     onLogin = async () => {
         let { email , password, client_id, redirect_uri, response_type, state, scope } = this.state;
         if(!email || !password){
+            this.setState({
+                error: 'Vui lòng nhập đầy đủ thông tin!'
+            });
             return;
         }
         return axios.post(`${hostname}/user/login`, {
@@ -114,7 +117,7 @@ class Login extends React.Component{
         return(
         <React.Fragment>
         <Helmet>
-        <title>Đăng nhập</title>
+        <title>Wecantalk.vn - Đăng nhập</title>
         </Helmet>
             {
                 this.state.data === '' 
