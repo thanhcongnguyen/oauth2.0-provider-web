@@ -72,11 +72,13 @@ class Login extends React.Component{
     }
 
     onDeny = () => {
-
+        let url = `${this.state.redirect_uri}/redirect?error=access_denied`;
+        window.location.href = url;
     }
 
     onAllow = () => {
-
+        let url = `${this.state.redirect_uri}/redirect?code=${this.state.data.code}&state=${this.state.data.state}`;
+        window.location.href = url;
     }
 
     render(){
