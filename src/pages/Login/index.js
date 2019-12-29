@@ -60,17 +60,31 @@ class Login extends React.Component{
             let errorMessage = _.get(error, 'response.data.error');
             let errors = ['user not exits!', 'invalid password!', 'error_uri'];
             let { redirect_uri } = this.state;
-            if( redirect_uri ){
-                if(errors.indexOf(errorMessage) === -1){
-                    let url = `${this.state.redirect_uri}/redirect?error=${errorMessage}`;
-                    this.props.history.replace(url);
-                }
+                
+            if(errorMessage == 'invalid password!'){
+                this.setState({
+                    error: 'Mật khẩu không đúng!'
+                });
                 return;
             }
-            
+
+            if(errorMessage == 'user not exits!'){
+                this.setState({
+                    error: 'Tài khoản không đúng!'
+                });
+                return;
+            }
+
+            if(errors.indexOf(errorMessage) === -1 && redirect_uri){
+                let url = `${this.state.redirect_uri}/redirect?error=${errorMessage}`;
+                this.props.history.replace(url);
+                return;
+            }
+
             this.setState({
                 error: 'Yêu cầu không hợp lệ, vui lòng kiểm tra lại!'
             });
+
         });
     }
 
