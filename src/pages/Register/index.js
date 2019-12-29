@@ -100,7 +100,7 @@ export default class Register extends React.Component {
                             <span className="login100-form-title p-b-55">
                                 We Can Talk
                             </span>
-        
+                            <div class="title-register"><h5>Đăng ký tài khoản</h5></div>
                             <div className="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
                                 <input 
                                     className="input100" 
