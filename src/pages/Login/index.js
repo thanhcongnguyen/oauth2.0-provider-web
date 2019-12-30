@@ -80,7 +80,8 @@ class Login extends React.Component{
 
             if(errors.indexOf(errorMessage) === -1 && redirect_uri){
                 let url = `${this.state.redirect_uri}/redirect?error=${errorMessage}`;
-                this.props.history.replace(url);
+                // this.props.history.replace(url);
+                window.location.href = url;
                 return;
             }
 
@@ -105,12 +106,14 @@ class Login extends React.Component{
 
     onDeny = () => {
         let url = `${this.state.redirect_uri}/redirect?error=access_denied`;
-        this.props.history.replace(url);
+        // this.props.history.replace(url);
+        window.location.href = url;
     }
 
     onAllow = () => {
         let url = `${this.state.redirect_uri}/redirect?code=${this.state.data.code}&state=${this.state.data.state}`;
-        this.props.history.replace(url);
+        // this.props.history.replace(url);
+        window.location.href = url;
     }
 
     render(){
