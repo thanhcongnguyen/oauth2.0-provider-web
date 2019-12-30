@@ -1,1 +1,1 @@
-export const hostname = 'https://wecantalk.vn:8000';
+export const hostname = 'https://wecantalk.vn/api';
